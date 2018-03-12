@@ -1,0 +1,20 @@
+#!/bin/sh /etc/rc.common
+#
+# Copyright (C) 1999-2018 TonyLu <tonylu@tony-cloud.com>
+#
+
+START=16
+
+start() {
+	nohup /etc/sh/memcache.sh >/dev/null 2>&1 &
+    logger -t "memcache" "memory inode cache autoflush daemon start"
+}
+
+stop() {
+	killall memcache.sh
+	logger -t "memcache" "memory inode cache autoflush daemon stop"
+}
+
+restart() {
+    stop&&start
+}
